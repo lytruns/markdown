@@ -1,13 +1,3 @@
-
-```diff
-- text in red
-+ text in green
-! text in orange
-# text in gray
-@@ text in purple (and bold)@@
-```
-
-
 # <h1 align="center">MotorHead</h1>
 
 <h4 align="center"> 
@@ -53,40 +43,19 @@ big_motorhead [options] arquivos | diretórios
 <p align="justify"> :robot:Você deve dar ao MotorHead o nome de um arquivo ou pasta onde contém os arquivos indicando a localização pelo caminho relativo ou completo, sujeito às mesmas regras e configuração utilizadas em outros pacotes python. Deve-se prestar atenção ao na indicação do arquivo, pois é um erro comum analisar o trajeto até o arquivo selecionado não passando sua extensão final.:robot: </p>
 
 <p align="justify"> :robot:
-Também é possível analisar arquivos . IPYNB, tendo em mente que o MotorHead tentará converter o nome do arquivo em um nome de módulo “.py” e só será capaz de processar o arquivo se for bem-sucedido.:robot: </p>
+Também é possível analisar arquivos ". IPYNB", tendo em mente que o MotorHead tentará converter o nome do arquivo em um nome de módulo “.py” e só será capaz de processar o arquivo se for bem-sucedido.:robot: </p>
 
 
 
-## Comandos CLI
+### Verificando arquivos
 
-
-
-
-<p align="justify">Seguindo as boas práticas é necessário para a esteira de produçã a preseça dos seguintes arquivos: </p>
-
-~~~python
-README.md
-requirements.txt
-.gitignore
-~~~
-
-<p align="justify">Desta forma é necessário executar essa verificação através dos comandos: : </p>
+<p align="justify"> Uma modelo obrigatoriamente deverá possuir os arquivos README.md | requirements.txt | .gitignore , apenas com o conjunto desses arquivos será possível dar proseguimento do modelo para a esteira de produção. Para a verificação em sua pasta de todos os atributos necessários é invocado o comando: </p>
 
 ~~~python
 !python3 -m big_motorhead.cli -d
 ~~~
 
-<p align="justify">No caso da ausência de alguns dos arquivos citados acima  <span style="color:orange;">Word up</span> </p> 
-
-<span style="color:orange;">Word up</span>
-
-
-<text font-size="16" x="10" y="20">
-    <tspan fill="red">Hello</tspan>,
-    <tspan fill="green">world</tspan>!
-  </text>
-</svg>
-
+<p align="justify"> No caso da ausência de alguns dos arquivos será exibido uma mensagem de advertência da seguinte forma: </p>
 
 ```diff
 Não foi encontrado os seguintes arquivos para validar a estrutura
@@ -96,20 +65,91 @@ Não foi encontrado os seguintes arquivos para validar a estrutura
 README.md | requirements.txt | .gitignore 
 ```
 
-
+<p align="justify"> No caso em que todos os requisitos sejam atendidos será exibido: </p>
     
+
+
+<p align="justify">Desta forma é necessário executar essa verificação através dos comandos: : </p>
 
 ~~~python
 !python3 -m big_motorhead.cli -d
 ~~~
 
+<p align="justify">No caso da ausência de alguns dos arquivos citados acima será exibido uma resposta:</p> 
 
+```diff
+- Não foi encontrado os seguintes arquivos para validar a estrutura: 
+```
+
+```diff
+! README.md | requirements.txt | .gitignore 
+```
+
+<p align="justify"> Na presença de todos os arquivos necessários para atender a estrutura do modelo:</p> 
+
+
+```diff
++ PASSED                     100%
+```
+
+
+
+Verificar os erros de sintaxe do .ipynb
 
 
 
 ~~~python
 !python3 -m big_motorhead.cli -f arquivos.ipynb
 ~~~
+
+
+
+
+# Mais informações PEP8
+<details>
+  <summary>Layout de código</summary>
+## Recuo  
+<p align="justify">As linhas de continuação devem alinhar os elementos agrupados verticalmente, usando a linha implícita do Python, juntando-se entre parênteses, colchetes e colchetes, ou usando um recuo suspenso. Ao usar um recuo deslocado, o seguinte deve ser considerado; não deve haver argumentos na primeira linha e recuo adicional deve ser usado para se distinguir claramente como uma linha de continuação:</p> 
+
+
+```python
+# Correto:
+
+# Alinhado com o delimitador de abertura.
+foo = long_function_name(var_one, var_two,
+                         var_three, var_four)
+
+# Adicione 4 espaços (um nível extra de recuo) para distinguir os argumentos do resto.
+def long_function_name(
+        var_one, var_two, var_three,
+        var_four):
+    print(var_one)
+
+# Os recuos pendurados devem adicionar um nível.
+foo = long_function_name(
+    var_one, var_two,
+    var_three, var_four)
+```
+
+    
+    
+
+```python
+# Errado:
+
+# Argumentos na primeira linha proibidos quando não estiver usando alinhamento vertical.
+foo = long_function_name (var_one, var_two,
+    var_three, var_four)
+
+# Indentação adicional necessária, pois a indentação não é distinguível.
+def long_function_name (
+    var_one, var_two, var_three,
+    var_four):
+    imprimir (var_one)
+```
+    
+</p>
+</details> 
 
 
 
