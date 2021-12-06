@@ -1,3 +1,13 @@
+
+```diff
+- text in red
++ text in green
+! text in orange
+# text in gray
+@@ text in purple (and bold)@@
+```
+
+
 # <h1 align="center">MotorHead</h1>
 
 <h4 align="center"> 
@@ -44,6 +54,69 @@ big_motorhead [options] arquivos | diretórios
 
 <p align="justify"> :robot:
 Também é possível analisar arquivos . IPYNB, tendo em mente que o MotorHead tentará converter o nome do arquivo em um nome de módulo “.py” e só será capaz de processar o arquivo se for bem-sucedido.:robot: </p>
+
+
+
+## Comandos CLI
+
+
+
+
+<p align="justify">Seguindo as boas práticas é necessário para a esteira de produçã a preseça dos seguintes arquivos: </p>
+
+~~~python
+README.md
+requirements.txt
+.gitignore
+~~~
+
+<p align="justify">Desta forma é necessário executar essa verificação através dos comandos: : </p>
+
+~~~python
+!python3 -m big_motorhead.cli -d
+~~~
+
+<p align="justify">No caso da ausência de alguns dos arquivos citados acima  <span style="color:orange;">Word up</span> </p> 
+
+<span style="color:orange;">Word up</span>
+
+
+<text font-size="16" x="10" y="20">
+    <tspan fill="red">Hello</tspan>,
+    <tspan fill="green">world</tspan>!
+  </text>
+</svg>
+
+
+```diff
+Não foi encontrado os seguintes arquivos para validar a estrutura
+```
+
+```diff
+README.md | requirements.txt | .gitignore 
+```
+
+
+    
+
+~~~python
+!python3 -m big_motorhead.cli -d
+~~~
+
+
+
+
+
+~~~python
+!python3 -m big_motorhead.cli -f arquivos.ipynb
+~~~
+
+
+
+
+
+
+
 
 
 
