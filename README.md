@@ -42,20 +42,19 @@ big_motorhead [options] arquivos | diretórios
 
 <p align="justify"> :robot:Você deve dar ao MotorHead o nome de um arquivo ou pasta onde contém os arquivos indicando a localização pelo caminho relativo ou completo, sujeito às mesmas regras e configuração utilizadas em outros pacotes python. Deve-se prestar atenção ao na indicação do arquivo, pois é um erro comum analisar o trajeto até o arquivo selecionado não passando sua extensão final.:robot: </p>
 
-<p align="justify"> :robot:
-Também é possível analisar arquivos ". IPYNB", tendo em mente que o MotorHead tentará converter o nome do arquivo em um nome de módulo “.py” e só será capaz de processar o arquivo se for bem-sucedido.:robot: </p>
+<p align="justify"> :robot: Também é possível analisar arquivos ". IPYNB", tendo em mente que o MotorHead tentará converter o nome do arquivo em um nome de módulo “.py” e só será capaz de processar o arquivo se for bem-sucedido. :robot: </p>
 
 
 
 ### Verificando arquivos
 
-<p align="justify"> Uma modelo obrigatoriamente deverá possuir os arquivos README.md | requirements.txt | .gitignore , apenas com o conjunto desses arquivos será possível dar proseguimento do modelo para a esteira de produção. Para a verificação em sua pasta de todos os atributos necessários é invocado o comando: </p>
+<p align="justify">:robot:  Uma modelo obrigatoriamente deverá possuir os arquivos README.md | requirements.txt | .gitignore , apenas com o conjunto desses arquivos será possível dar prosseguimento do modelo para a esteira de produção. Para a verificação em sua pasta de todos os atributos necessários é invocado o comando: :robot: </p>
 
 ~~~python
 !python3 -m big_motorhead.cli -d
 ~~~
 
-<p align="justify"> No caso da ausência de alguns dos arquivos será exibido uma mensagem de advertência da seguinte forma: </p>
+<p align="justify">:robot:  No caso da ausência de alguns dos arquivos será exibido uma mensagem de advertência da seguinte forma: :robot: </p>
 
 ```diff
 Não foi encontrado os seguintes arquivos para validar a estrutura
@@ -65,17 +64,19 @@ Não foi encontrado os seguintes arquivos para validar a estrutura
 README.md | requirements.txt | .gitignore 
 ```
 
-<p align="justify"> No caso em que todos os requisitos sejam atendidos será exibido: </p>
+<p align="justify">:robot:  No caso em que todos os requisitos sejam atendidos será exibido: :robot: </p>
     
+```diff
++ PASSED                     100%
+```
 
-
-<p align="justify">Desta forma é necessário executar essa verificação através dos comandos: : </p>
+<p align="justify">:robot:  Desta forma é necessário executar essa verificação através dos comandos: :robot: </p>
 
 ~~~python
 !python3 -m big_motorhead.cli -d
 ~~~
 
-<p align="justify">No caso da ausência de alguns dos arquivos citados acima será exibido uma resposta:</p> 
+<p align="justify">:robot: No caso da ausência de alguns dos arquivos citados acima será exibido uma resposta: :robot: </p> 
 
 ```diff
 - Não foi encontrado os seguintes arquivos para validar a estrutura: 
@@ -85,29 +86,43 @@ README.md | requirements.txt | .gitignore
 ! README.md | requirements.txt | .gitignore 
 ```
 
-<p align="justify"> Na presença de todos os arquivos necessários para atender a estrutura do modelo:</p> 
+<p align="justify">:robot:  Na presença de todos os arquivos necessários para atender a estrutura do modelo: :robot: </p> 
 
 
 ```diff
 + PASSED                     100%
 ```
 
-
-
-Verificar os erros de sintaxe do .ipynb
-
+<p align="justify">:robot:  Para verificar a interpretação do seu código, bem como fornecer uma classificação geral com base no número e na gravidade dos erros é utilizado o comando: :robot: </p>
 
 
 ~~~python
 !python3 -m big_motorhead.cli -f arquivos.ipynb
 ~~~
 
+<p align="justify">:robot:  No caso do seu código esatr viavél de ser interpretado, bem como atendendo todos os requisitos supracitados você receberá um aviso: :robot: </p>
+
+```diff
++ PASSED                     100%
+```
+
+<p align="justify">:robot:  Caso contrário uma advertência será exibida informando em qual linha encontra-se o "bug", bem como uma avaliação do seu código: :robot: </p>
+    
+ 
+
+```diff
+- REJECT                      0%  
+```
 
 
 
-### Mais informações PEP8
+<h3 align="center">
+    <a href="https://www.python.org/">🔗Boas Práticas</a>
+</h3>
+
+###
 <details>
-  <summary>Layout de código</summary>
+  <summary>Boas Práticas - Guia de estilo para código Python</summary>
     
 ### Recuo  
     
@@ -132,9 +147,7 @@ foo = long_function_name(
     var_one, var_two,
     var_three, var_four)
 ```
-
-    
-    
+     
 
 ```python
 # Errado:
