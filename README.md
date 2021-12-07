@@ -341,13 +341,330 @@ import foo.bar.yourclass
 
  <p align="justify"> ¹ O WildCard é um certificado de segurança SSL premium, ele possibilita a proteção de subdomínios ilimitados dentro de um único domínio através do protocolo HTTPS, em apenas um único certificado. </p> 
     
+
+### String Quotes
     
-    
+<p align="justify">Em Python, strings entre aspas simples e strings entre aspas são iguais. Este PEP não faz uma recomendação para isso. Escolha uma regra e cumpra-a. Quando uma string contém caracteres de aspas simples ou duplas, use o outro para evitar barras invertidas na string. Além disso, melhora a legibilidade.</p> 
 
     
+### Espaço em branco em expressões e declarações
+    
+<p align="justify">Imediatamente entre parênteses, colchetes ou colchetes:</p>    
+    
+```python
+# Correto:
+spam(ham[1], {eggs: 2})
+``` 
+    
+```python
+# Errado:
+spam( ham[ 1 ], { eggs: 2 } )
+``` 
+    
+<p align="justify">Entre uma vírgula final e um parêntese de fechamento a seguir:</p>  
+
+```python
+# Correto:
+foo = (0,)
+``` 
+    
+```python
+# Errado:
+bar = (0, )
+``` 
+ 
+<p align="justify">Imediatamente antes de uma vírgula, ponto e vírgula ou dois pontos:</p>  
+    
+```python
+# Correto:
+if x == 4: print x, y; x, y = y, x
+``` 
+    
+```python
+# Errado:
+if x == 4 : print x , y ; x , y = y , x
+```     
+    
+<p align="justify">No entanto, em uma fatia, os dois pontos atuam como um operador binário e devem ter quantidades iguais em ambos os lados (tratando-o como o operador com a prioridade mais baixa). Em uma fatia estendida, os dois pontos devem ter o mesmo espaçamento aplicado. Exceção: quando um parâmetro de fatia é omitido, o espaço é omitido:</p>      
+```python
+# Correto:
+ham[1:9], ham[1:9:3], ham[:9:3], ham[1::3], ham[1:9:]
+ham[lower:upper], ham[lower:upper:], ham[lower::step]
+ham[lower+offset : upper+offset]
+ham[: upper_fn(x) : step_fn(x)], ham[:: step_fn(x)]
+ham[lower + offset : upper + offset]
+``` 
+    
+```python
+# Errado:
+ham[lower + offset:upper + offset]
+ham[1: 9], ham[1 :9], ham[1:9 :3]
+ham[lower : : upper]
+ham[ : upper]
+```    
+ 
+<p align="justify">Imediatamente antes do parêntese de abertura que inicia a lista de argumentos de uma chamada de função:</p> 
+    
+```python
+# Correto:
+spam(1)
+``` 
+    
+```python
+# Errado:
+spam (1)
+```     
+
+<p align="justify">Imediatamente antes do parêntese de abertura que inicia uma indexação ou fracionamento:</p>  
+    
+```python
+# Correto:
+dct['key'] = lst[index]
+``` 
+    
+```python
+# Errado:
+dct ['key'] = lst [index]
+```          
+    
+<p align="justify">Mais de um espaço ao redor de um operador de atribuição (ou outro) para alinhá-lo com outro:</p> 
+    
+```python
+# Correto:
+x = 1
+y = 2
+long_variable = 3
+``` 
+    
+```python
+# Errado:
+x             = 1
+y             = 2
+long_variable = 3]
+```   
+    
+### Outras Recomendações
+     
+<p align="justify">Evite espaços em branco à direita em qualquer lugar. Como geralmente é invisível, pode ser confuso: por exemplo, uma barra invertida seguida por um espaço e uma nova linha não conta como um marcador de continuação de linha. Alguns editores não o preservam e muitos projetos (como o próprio CPython) têm ganchos de pré-commit que o rejeitam.</p>
+
+<p align="justify">Sempre rodeiam estes operadores binários com um único espaço em ambos os lados: de atribuição ( = ), atribuição ampliada ( + = , - = etc.), as comparações ( == , < , > , ! = , <> , <= , > = , in , not in , is , is not ), Booleanos ( e , ou , não ).</p>
+
+<p align="justify">Se forem usados ​​operadores com prioridades diferentes, considere adicionar espaços em branco ao redor dos operadores com a (s) prioridade (s) mais baixa (s). Use seu próprio julgamento; no entanto, nunca use mais de um espaço e sempre tenha a mesma quantidade de espaços em branco em ambos os lados de um operador binário:</p>
+    
+```python
+# Correto:
+i = i + 1
+submitted += 1
+x = x*2 - 1
+hypot2 = x*x + y*y
+c = (a+b) * (a-b)
+``` 
+    
+```python
+# Errado:
+i=i+1
+submitted +=1
+x = x * 2 - 1
+hypot2 = x * x + y * y
+c = (a + b) * (a - b)
+
+```     
+
+<p align="justify">As anotações de função devem usar as regras normais para dois pontos e sempre ter espaços ao redor da seta -> se houver. (Consulte as anotações de função abaixo para obter mais informações sobre as anotações de função.):</p>
+    
+```python
+# Correto:
+def munge(input: AnyStr): ...
+def munge() -> PosInt: ...
+``` 
+    
+```python
+# Errado:
+def munge(input:AnyStr): ...
+def munge()->PosInt: ...
+```      
+<p align="justify">Não use espaços ao redor do sinal = quando usado para indicar um argumento de palavra-chave, ou quando usado para indicar um valor padrão para um parâmetro de função não anotado </p>    
+    
+```python
+# Correto:
+def complex(real, imag=0.0):
+    return magic(r=real, i=imag)
+``` 
+    
+```python
+# Errado:
+def complex(real, imag = 0.0):
+    return magic(r = real, i = imag)
+```    
+ 
+<p align="justify">Ao combinar uma anotação de argumento com um valor padrão, no entanto, use espaços ao redor do sinal = :</p> 
+    
+```python
+# Correto:
+def munge(sep: AnyStr = None): ...
+def munge(input: AnyStr, sep: AnyStr = None, limit=1000): ...
+``` 
+    
+```python
+# Errado:
+def munge(input: AnyStr=None): ...
+def munge(input: AnyStr, limit = 1000): ...
+```     
+    
+<p align="justify">Instruções compostas (várias instruções na mesma linha) geralmente são desencorajadas:</p>    
+    
+```python
+# Correto:
+if foo == 'blah':
+    do_blah_thing()
+do_one()
+do_two()
+do_three()
+``` 
+    
+```python
+# Errado:
+if foo == 'blah': do_blah_thing()
+do_one(); do_two(); do_three()
+```
+    
+<p align="justify">Embora às vezes seja normal colocar um if / for / while com um corpo pequeno na mesma linha, nunca faça isso para instruções com várias cláusulas. Além disso, evite dobrar essas linhas longas!</p>    
+    
+    
+```python
+# Muito Errado:
+if foo == 'blah': do_blah_thing()
+else: do_non_blah_thing()
+
+try: something()
+finally: cleanup()
+
+do_one(); do_two(); do_three(long, argument,
+                             list, like, this)
+
+if foo == 'blah': one(); two(); three()
+```
+
+             
+### Quando usar vírgulas finais
+             
+<p align="justify">As vírgulas finais são geralmente opcionais, exceto que são obrigatórias ao fazer uma tupla de um elemento. Para maior clareza, é recomendado colocar o último entre parênteses (tecnicamente redundantes):</p>        
+    
+```python
+# Correto:
+FILES = ('setup.cfg',)
+```   
+    
+```python
+# Errado:
+FILES = 'setup.cfg',
+```   
+    
+<p align="justify">Quando as vírgulas finais são redundantes, geralmente são úteis quando um sistema de controle de versão é usado, quando se espera que uma lista de valores, argumentos ou itens importados seja estendida ao longo do tempo. O padrão é colocar cada valor (etc.) em uma linha sozinho, sempre adicionando uma vírgula final e adicionar o parêntese / colchete / chave na próxima linha. No entanto, não faz sentido ter uma vírgula final na mesma linha do delimitador de fechamento (exceto no caso acima de tuplas de singleton):</p>      
+
+```python
+# Correto:
+FILES = [
+    'setup.cfg',
+    'tox.ini',
+    ]
+initialize(FILES,
+           error=True,
+           )
+```   
+    
+```python
+# Errado:
+FILES = ['setup.cfg', 'tox.ini',]
+initialize(FILES, error=True,)
+```  
+ 
+### Comentários
+    
+<p align="justify">Comentários que contradizem o código são piores do que nenhum comentário. Sempre tenha como prioridade manter os comentários atualizados quando o código mudar! Os comentários devem ser frases completas. A primeira palavra deve ser maiúscula, a menos que seja um identificador que comece com uma letra minúscula (nunca altere a capitalização dos identificadores!).</p> 
+
+<p align="justify">Os comentários em bloco geralmente consistem em um ou mais parágrafos construídos a partir de frases completas, com cada frase terminando em um ponto. Você deve usar dois espaços após um ponto final da frase em comentários com várias frases, exceto após a frase final. Certifique-se de que seus comentários sejam claros e facilmente compreensíveis para outros falantes do idioma em que você está escrevendo. Programadores Python de países que não falam inglês: por favor, escreva seus comentários em inglês, a menos que você tenha 120% de certeza de que o código nunca será lido por pessoas que não falam sua língua.</p>      
+    
+### Bloquear comentários
+    
+<p align="justify">Os comentários de bloco geralmente se aplicam a algum (ou todo) o código que os segue e são indentados no mesmo nível desse código. Cada linha de um bloco de comentário começa com um # e um único espaço (a menos que seja um texto recuado dentro do comentário). Os parágrafos dentro de um comentário de bloco são separados por uma linha contendo um único # .</p>     
+    
+### Comentários "Inline"
+
+<p align="justify">Use comentários embutidos com moderação. Um comentário embutido é um comentário na mesma linha de uma declaração. Os comentários embutidos devem ser separados por pelo menos dois espaços da declaração. Eles devem começar com um # e um único espaço. Comentários inline são desnecessários e, na verdade, distraem se afirmam o óbvio. Não faça isso:.</p>
+ 
+```python
+#Errado
+x = x + 1                 # Increment x
+```   
 
     
+### Convenções de Nomenclatura   
+
+<p align="justify">As convenções de nomenclatura da biblioteca do Python são um pouco complicadas, então nunca vamos conseguir isso completamente consistente - no entanto, aqui estão os padrões de nomenclatura atualmente recomendados. Novos módulos e pacotes (incluindo estruturas de terceiros) devem ser escritos de acordo com esses padrões, mas onde uma biblioteca existente tem um estilo diferente, a consistência interna é preferida.</p>
     
+    
+#### Nomes a evitar    
+<p align="justify">Nunca use os caracteres 'l' (letra el minúscula), 'O' (letra maiúscula oh) ou 'I' (olho de letra maiúscula) como nomes de variáveis ​​de caractere único. Em algumas fontes, esses caracteres são indistinguíveis dos numerais um e zero. Quando for tentado a usar 'l', use 'L'.</p>
+    
+#### Nomes de pacotes e módulos 
+<p align="justify">Os módulos devem ter nomes curtos, todos em minúsculas. Sublinhados podem ser usados ​​no nome do módulo se melhorar a legibilidade. Os pacotes Python também devem ter nomes curtos, todos em minúsculas, embora o uso de sublinhados seja desencorajado. Quando um módulo de extensão escrito em C ou C ++ tem um módulo Python acompanhante que fornece uma interface de nível superior (por exemplo, mais orientada a objetos), o módulo C / C ++ tem um sublinhado inicial (por exemplo, _socket ).</p>    
+
+    
+#### Nomes de classes
+<p align="justify">Os nomes das classes normalmente devem usar a convenção CapWords. A convenção de nomenclatura para funções pode ser usada em casos onde a interface é documentada e usada principalmente como um chamável. Observe que há uma convenção separada para nomes embutidos: a maioria dos nomes embutidos são palavras únicas (ou duas palavras executadas juntas), com a convenção CapWords usada apenas para nomes de exceção e constantes embutidas.</p>      
+
+#### Nomes de Variáveis ​​Globais
+<p align="justify">(Esperemos que essas variáveis ​​sejam destinadas ao uso em apenas um módulo.) As convenções são quase as mesmas que as das funções. Módulos que são projetados para uso por meio de M import * devem usar o mecanismo __all__ para evitar a exportação de globais ou usar a convenção mais antiga de prefixar esses globais com um sublinhado (o que você pode querer fazer para indicar que esses globais são "módulo não público "</p>       
+    
+#### Nomes de funções e variáveis
+<p align="justify">Os nomes das funções devem estar em letras minúsculas, com palavras separadas por sublinhados, conforme necessário para melhorar a legibilidade. Os nomes das variáveis ​​seguem a mesma convenção dos nomes das funções. MixedCase é permitido apenas em contextos onde esse já é o estilo predominante (por exemplo, threading.py), para manter a compatibilidade com versões anteriores.</p>       
+
+#### Argumentos de função e método
+<p align="justify">Sempre use self como o primeiro argumento para métodos de instância. Sempre use cls para o primeiro argumento para métodos de classe. Se o nome de um argumento de função conflitar com uma palavra-chave reservada, geralmente é melhor anexar um único sublinhado final em vez de usar uma abreviatura ou erro ortográfico. Portanto, class_ é melhor do que clss . (Talvez seja melhor evitar esses confrontos usando um sinônimo.)</p>       
+    
+#### Nomes de métodos e variáveis ​​de instância
+<p align="justify">Use as regras de nomenclatura de função: minúsculas com palavras separadas por sublinhados conforme necessário para melhorar a legibilidade. Use um sublinhado inicial apenas para métodos não públicos e variáveis ​​de instância. Para evitar conflitos de nome com subclasses, use dois sublinhados à esquerda para invocar as regras de mutilação de nome do Python. Python confunde esses nomes com o nome da classe: se a classe Foo tem um atributo denominado __a , ela não pode ser acessada por Foo .__ a . (Um usuário insistente ainda poderia obter acesso chamando Foo._Foo__a .) Geralmente, sublinhados à esquerda duplos devem ser usados ​​apenas para evitar conflitos de nome com atributos em classes projetadas para serem subclasses.</p>     
+    
+    
+#### Constantes
+<p align="justify">As constantes são geralmente definidas em um nível de módulo e escritas em letras maiúsculas com sublinhados separando as palavras. Os exemplos incluem MAX_OVERFLOW e TOTAL .</p>     
+    
+    
+### Retorno
+
+<p align="justify">Seja consistente nas declarações de retorno. Todas as instruções de retorno em uma função devem retornar uma expressão ou nenhuma delas. Se qualquer instrução de retorno retornar uma expressão, quaisquer instruções de retorno em que nenhum valor seja retornado devem declarar isso explicitamente como return None , e uma instrução de retorno explícita deve estar presente no final da função (se alcançável):</p>       
+    
+    
+```python
+# Correto:
+
+def foo(x):
+    if x >= 0:
+        return math.sqrt(x)
+    else:
+        return None
+
+def bar(x):
+    if x < 0:
+        return None
+    return math.sqrt(x)
+```   
+
+  ```python
+# Errado:
+
+def foo(x):
+    if x >= 0:
+        return math.sqrt(x)
+
+def bar(x):
+    if x < 0:
+        return
+    return math.sqrt(x)
+```   
+   
+
 </p>
 </details> 
 
