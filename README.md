@@ -70,29 +70,6 @@ README.md | requirements.txt | .gitignore
 + PASSED                     100%
 ```
 
-<p align="justify">:robot:  Desta forma é necessário executar essa verificação através dos comandos: :robot: </p>
-
-~~~python
-!python3 -m big_motorhead.cli -d
-~~~
-
-<p align="justify">:robot: No caso da ausência de alguns dos arquivos citados acima será exibido uma resposta: :robot: </p> 
-
-```diff
-- Não foi encontrado os seguintes arquivos para validar a estrutura: 
-```
-
-```diff
-! README.md | requirements.txt | .gitignore 
-```
-
-<p align="justify">:robot:  Na presença de todos os arquivos necessários para atender a estrutura do modelo: :robot: </p> 
-
-
-```diff
-+ PASSED                     100%
-```
-
 <p align="justify">:robot:  Para verificar a interpretação do seu código, bem como fornecer uma classificação geral com base no número e na gravidade dos erros é utilizado o comando: :robot: </p>
 
 
