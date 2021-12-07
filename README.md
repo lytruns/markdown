@@ -105,10 +105,12 @@ Verificar os erros de sintaxe do .ipynb
 
 
 
-# Mais informações PEP8
+### Mais informações PEP8
 <details>
   <summary>Layout de código</summary>
-## Recuo  
+    
+### Recuo  
+    
 <p align="justify">As linhas de continuação devem alinhar os elementos agrupados verticalmente, usando a linha implícita do Python, juntando-se entre parênteses, colchetes e colchetes, ou usando um recuo suspenso. Ao usar um recuo deslocado, o seguinte deve ser considerado; não deve haver argumentos na primeira linha e recuo adicional deve ser usado para se distinguir claramente como uma linha de continuação:</p> 
 
 
@@ -147,6 +149,95 @@ def long_function_name (
     var_four):
     imprimir (var_one)
 ```
+
+    
+<p align="justify">Quando a parte condicional de uma instrução if é longa o suficiente para exigir que seja escrita em várias linhas, é importante notar que a combinação de uma palavra-chave de dois caracteres (ou seja, if ), mais um único espaço, mais um parêntese de abertura cria um natural Recuo de 4 espaços para as linhas subsequentes da condicional multilinha. Isso pode produzir um conflito visual com o conjunto recuado de código aninhado dentro da instrução if , que também seria recuado naturalmente para 4 espaços. Este PEP não assume uma posição explícita sobre como (ou se) distinguir visualmente essas linhas condicionais do conjunto aninhado dentro da instrução if . As opções aceitáveis nesta situação incluem, mas não estão limitadas a:</p>     
+    
+
+```python
+# Na identação extra.
+if (this_is_one_thing and
+    that_is_another_thing):
+    do_something()
+
+# Adicione um comentário, que fornecerá alguma distinção aos editores
+# apoiando o realce de sintaxe.
+if (this_is_one_thing and
+    that_is_another_thing):
+    # Since both conditions are true, we can frobnicate.
+    do_something()
+
+# Adicione algum recuo extra na linha de continuação condicional.
+if (this_is_one_thing
+        and that_is_another_thing):
+    do_something()
+```
+ 
+    
+<p align="justify">A chave / colchete / parêntese de fechamento em construções de várias linhas podem se alinhar sob o primeiro caractere diferente de espaço em branco da última linha da lista, como em:</p>   
+    
+```python
+my_list = [
+    1, 2, 3,
+    4, 5, 6,
+    ]
+    
+result = some_function_that_takes_arguments(
+    'a', 'b', 'c',
+    'd', 'e', 'f',
+    )
+```
+
+<p align="justify"> ou pode ser alinhado sob o primeiro caractere da linha que inicia a construção multilinha, como em:</p> 
+  
+```python
+my_list = [
+    1, 2, 3,
+    4, 5, 6,
+]
+result = some_function_that_takes_arguments(
+    'a', 'b', 'c',
+    'd', 'e', 'f',
+)
+```
+
+    
+### Tabs ou Spaces
+    
+<p align="justify"> Os espaços são o método de indentação preferenciais. As guias devem ser usadas exclusivamente para manter consistentes o código que já está indentado com tabs. Python não permite a mistura de tabulações e espaços para indentação.</p> 
+    
+#### Comprimento Máximo da Linha
+    
+<p align="justify"> Para blocos longos de texto fluidos com menos restrições estruturais (docstrings ou comentários), o comprimento da linha deve ser limitado a 72 caracteres.
+
+Essa limitação é indicada visando que seja possivel vários arquivos abertos lado a lado no editor e funciona bem ao usar ferramentas de revisão de código que apresentam as duas versões em colunas adjacentes.
+
+O empacotamento padrão na maioria das ferramentas interrompe a estrutura visual do código, tornando-o mais difícil de entender. Os limites são escolhidos para evitar quebra nos editores com a largura da janela definida como 80, mesmo se a ferramenta colocar um glifo de marcador na coluna final ao quebrar as linhas. Algumas ferramentas baseadas na web podem não oferecer quebra de linha dinâmica.
+
+Algumas equipes preferem um comprimento de linha mais longo. Para código mantido exclusiva ou principalmente por uma equipe que pode chegar a um acordo sobre esse problema, não há problema em aumentar o limite de comprimento da linha para 99 caracteres, desde que os comentários e docstrings ainda tenham 72 caracteres.
+
+A biblioteca padrão do Python é conservadora e requer linhas limitadas a 79 caracteres (e docstrings / comentários a 72).
+
+A maneira preferida de quebrar linhas longas é usando a continuação de linha implícita do Python entre parênteses, colchetes e colchetes. Linhas longas podem ser quebradas em várias linhas envolvendo as expressões entre parênteses. Eles devem ser usados em vez de usar uma barra invertida para a continuação da linha.
+
+Barras invertidas ainda podem ser apropriadas às vezes. Por exemplo, long, multiple with -statements não podem usar continuação implícita, então barras invertidas são aceitáveis:.</p> 
+
+
+```python
+with open('/path/to/some/file/you/want/to/read') as file_1, \
+     open('/path/to/some/file/being/written', 'w') as file_2:
+    file_2.write(file_1.read()) 
+```
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
 </p>
 </details> 
