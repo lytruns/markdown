@@ -229,14 +229,123 @@ with open('/path/to/some/file/you/want/to/read') as file_1, \
     file_2.write(file_1.read()) 
 ```
     
+<p align="justify"> Durante décadas, o estilo recomendado era interromper depois de operadores binários. Mas isso pode prejudicar a legibilidade de duas maneiras: os operadores tendem a se espalhar por colunas diferentes na tela, e cada operador é movido para longe de seu operando e para a linha anterior. Aqui, o olho tem que fazer um trabalho extra para dizer quais itens são adicionados e quais são subtraídos: </p>  
+    
+    
+ ```python
+# Errado: 
+# operadores ficam longe de seus operandos 
+income = (gross_wages +
+          taxable_interest +
+          (dividends - qualified_dividends) -
+          ira_deduction -
+          student_loan_interest)
+```
+
+<p align="justify"> Para resolver esse problema de legibilidade, os matemáticos e seus editores seguem a convenção oposta. Donald Knuth explica a regra tradicional em sua série Computers and Typesetting : "Embora as fórmulas dentro de um parágrafo sempre quebrem após as operações e relações binárias, as fórmulas exibidas sempre quebram antes das operações binárias". Seguir a tradição da matemática geralmente resulta em um código mais legível: </p>  
+
+ ```python
+# Correto: 
+# fácil de combinar operadores com 
+income = (gross_wages
+          + taxable_interest
+          + (dividends - qualified_dividends)
+          - ira_deduction
+          - student_loan_interest)
+```
+
+<p align="justify"> No código Python, é permitido interromper antes ou depois de um operador binário, desde que a convenção seja consistente localmente. Para o novo código, o estilo de Knuth é sugerido.</p>
+
+    
+### Linhas em Branco
+    
+<p align="justify"> Envolva as funções de nível superior e as definições de classe com duas linhas em branco.
+
+As definições de método dentro de uma classe são circundadas por uma única linha em branco.</p>
+
+<p align="justify"> Linhas em branco extras podem ser usadas (com moderação) para separar grupos de funções relacionadas. Linhas em branco podem ser omitidas entre um monte de linhas simples relacionadas (por exemplo, um conjunto de implementações fictícias).</p>
+
+<p align="justify"> Use linhas em branco nas funções, com moderação, para indicar seções lógicas.</p>
+
+<p align="justify"> Python aceita o caractere de feed de formulário control-L (ou seja, ^ L) como espaço em branco; Muitas ferramentas tratam esses caracteres como separadores de página, portanto, você pode usá-los para separar páginas de seções relacionadas de seu arquivo. Observe que alguns editores e visualizadores de código baseados na web podem não reconhecer control-L como um feed de formulário e exibirão outro glifo em seu lugar. </p>
+    
+
+ ### Codificação do arquivo fonte
+    
+ <p align="justify"> O código na distribuição central do Python deve sempre usar UTF-8 e não deve ter uma declaração de codificação.</p>
+
+ <p align="justify"> Na biblioteca padrão, codificações não UTF-8 devem ser usadas apenas para fins de teste. Use caracteres não ASCII com moderação, de preferência apenas para denotar lugares e nomes humanos. Se estiver usando caracteres não ASCII como dados, evite caracteres Unicode barulhentos como z̯̯͡a̧͎̺l̡͓̫g̹̲o̡̼̘ e marcas de ordem de bytes.</p>
+
+ <p align="justify"> Todos os identificadores na biblioteca padrão do Python DEVEM usar identificadores somente ASCII e DEVEM usar palavras em inglês sempre que possível (em muitos casos, abreviações e termos técnicos são usados ​​que não são em inglês).</p>
+
+ <p align="justify"> Os projetos de código aberto com um público global são incentivados a adotar uma política semelhante.</p>
+    
+  ### Importações
+    
+  <p align="justify"> As importações geralmente devem ser feitas em linhas separadas:</p>
+    
+```python
+# Correto:
+import os
+import sys
+```
+
+   ```python
+# Errado:
+import sys, os
+```
+    
+<p align="justify"> As importações são sempre colocadas no início do arquivo, logo após quaisquer comentários do módulo e docstrings, e antes das constantes e globais do módulo.
+
+As importações devem ser agrupadas na seguinte ordem:</p>   
+    
+<p align="justify"> É a linguagem de programação nativa da web:</p>  
+
+1. Importações de biblioteca padrão.
+2. Importações de terceiros relacionados.
+3. Importações específicas de aplicativos / bibliotecas locais.
+Você deve colocar uma linha em branco entre cada grupo de importações.
+    
+    
+<p align="justify">As importações absolutas são recomendadas, pois geralmente são mais legíveis e tendem a se comportar melhor (ou pelo menos fornecer mensagens de erro melhores) se o sistema de importação estiver configurado incorretamente (como quando um diretório dentro de um pacote termina em sys.path ):</p> 
+
+```python
+import mypkg.sibling
+from mypkg import sibling
+from mypkg.sibling import example
+```
+
+<p align="justify">No entanto, as importações relativas explícitas são uma alternativa aceitável às importações absolutas, especialmente ao lidar com layouts de pacotes complexos em que o uso de importações absolutas seria desnecessariamente prolixo:</p> 
+    
+```python
+from . import sibling
+from .sibling import example
+``` 
+    
+ <p align="justify">O código da biblioteca padrão deve evitar layouts de pacote complexos e sempre usar importações absolutas. Ao importar uma classe de um módulo que contém uma classe, geralmente não há problema em soletrar o seguinte:</p>    
+    
+    
+```python
+from myclass import MyClass
+from foo.bar.yourclass import YourClass
+```    
+    
+ <p align="justify">Se essa grafia causar conflitos de nomes locais, soletre-os explicitamente:</p>       
+    
+ ```python
+import myclass 
+import foo.bar.yourclass
+```    
+  
+ <p align="justify"> Importações de WildCard¹ ( de <module> import * ) devem ser evitadas, pois não deixam claro quais nomes estão presentes no namespace, confundindo os leitores e muitas ferramentas automatizadas. Há um caso de uso defensável para uma importação de WildCard, que é republicar uma interface interna como parte de uma API pública (por exemplo, sobrescrever uma implementação Python pura de uma interface com as definições de um módulo acelerador opcional e exatamente quais definições serão sobrescrito não é conhecido com antecedência). Ao republicar nomes dessa maneira, as diretrizes abaixo com relação às interfaces públicas e internas ainda se aplicam.</p>    
+
+ <p align="justify"> ¹ O WildCard é um certificado de segurança SSL premium, ele possibilita a proteção de subdomínios ilimitados dentro de um único domínio através do protocolo HTTPS, em apenas um único certificado. </p> 
     
     
     
+
     
-    
-    
-    
-    
+
     
     
 </p>
